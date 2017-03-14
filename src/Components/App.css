@@ -1,0 +1,8 @@
+.StoreListContainer{
+    overflow: scroll;
+    height: 500px;
+}
+
+.sideBarContainer{
+    position: relative;
+}
