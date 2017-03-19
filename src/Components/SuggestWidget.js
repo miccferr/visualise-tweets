@@ -20,17 +20,11 @@ const getSuggestionValue = suggestion => {
   suggestion.name
 };
 
-// const suggestionsList = 
-// const Suggestion = () => <button ></button>
 
 // Use your imagination to render suggestions.
 const renderSuggestion = suggestion => (
-  <div>
-    {/*// TODO: instead of returning this plain list you need to return a list component
-    // with an onChange method able to control the state
-    // copy what you have from old Sidebarcontent.js*/}
-    {suggestion.properties.address}
-    {/*<Suggestion onClick={this.props.onFilter} > {suggestion.properties.address} </Suggestion>*/}
+  <div>    
+    {suggestion.properties.address}    
   </div>
 );
 
@@ -73,6 +67,7 @@ class SuggestWidget extends React.Component {
   };
 
   onSuggestionSelected = (e, suggestion) => {
+    // TODO: zoom to marker or somthing..
     console.log(suggestion )
   }
 
