@@ -2,10 +2,27 @@ import React, {Component} from 'react';
 import './App.css';
 import data from '../../public/data.json';
 import MySidebar from './MySidebar';
+const Promise = require("bluebird");
+const mongoose = Promise.promisifyAll(require("mongoose"));
 
-// import LocationFilters from './LocationFilter'
+// Mongoose connection to MongoDB
+    mongoose.connect('mongodb://localhost/Tweets', function (error) {
+      if (error) {
+        console.log(error);
+      }
+    });
 
-const numbers = [1, 2, 3, 4, 5];
+    // Mongoose Schema definition
+    const Schema = mongoose.Schema;
+    const JsonSchema = new Schema({
+      name: String,
+      type: Schema.Types.Mixed
+    });
+
+    // Mongoose Model definition
+    let Json = mongoose.model('JString', JsonSchema, 'Tweets');
+
+    
 
 function $set(...objects) {
   return Object.assign({}, ...objects);
@@ -74,6 +91,13 @@ class App extends Component {
 
   handleNodesReset = () => {
     this.setState(this.state);
+  };
+
+  componentDidMount = () => {
+    /* GET json data. */
+    Json.find()
+      .then(data => console.log(data))      
+      .catch(err => console.log(err.toString()));
   };
 
   render() {
