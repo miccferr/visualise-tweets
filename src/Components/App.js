@@ -24,7 +24,15 @@ class App extends Component {
     };
   }
 
-  
+  handleFilter = (e)=>{    
+    e.preventDefault();  
+    console.log('asdasdasd');
+    console.log(e.target.value);
+
+    this.setState({data: e.target.value});
+    // console.log(this.state.subMenuToRender);
+  }
+
   handleFilterType = (e)=>{    
     e.preventDefault();  
     console.log(e.target.value);
@@ -83,8 +91,8 @@ class App extends Component {
           onSetOpen={this.onSetSidebarOpen}
           removeNode={this.handleNodeRemoval}
           resetNodes={this.handleNodesReset}
-          menuButtonClick={this.menuButtonClick}          
-          
+          menuButtonClick={this.menuButtonClick}
+          handleFilter={this.handleFilter}          
           />
       </div>
     );

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Sidebar from 'react-sidebar';
 import FilterButtonsMenu from './FilterButtons.js';
 import SuggestWidget from './SuggestWidget.js'
-
+// import Example from './autoexample.js'
 
 const styles = {
     sidebar: {
@@ -34,8 +34,8 @@ function SidebarContent(props) {
 
     return (
         <div style={styles.content}>
-             <SuggestWidget suggestions={props.data.features} />
-            
+             <SuggestWidget suggestions={props.data.features} onFilter={props.onFilter} />
+            {/*<Example suggestions={props.data.features}/>*/}
         </div>
     )
 };
