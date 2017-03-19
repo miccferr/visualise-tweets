@@ -2,27 +2,10 @@ import React, {Component} from 'react';
 import './App.css';
 import data from '../../public/data.json';
 import MySidebar from './MySidebar';
-const Promise = require("bluebird");
-const mongoose = Promise.promisifyAll(require("mongoose"));
 
-// Mongoose connection to MongoDB
-    mongoose.connect('mongodb://localhost/Tweets', function (error) {
-      if (error) {
-        console.log(error);
-      }
-    });
+// import LocationFilters from './LocationFilter'
 
-    // Mongoose Schema definition
-    const Schema = mongoose.Schema;
-    const JsonSchema = new Schema({
-      name: String,
-      type: Schema.Types.Mixed
-    });
-
-    // Mongoose Model definition
-    let Json = mongoose.model('JString', JsonSchema, 'Tweets');
-
-    
+const numbers = [1, 2, 3, 4, 5];
 
 function $set(...objects) {
   return Object.assign({}, ...objects);
@@ -43,9 +26,7 @@ class App extends Component {
 
   handleFilter = (e)=>{    
     e.preventDefault();  
-    console.log('asdasdasd');
     console.log(e.target.value);
-
     this.setState({data: e.target.value});
     // console.log(this.state.subMenuToRender);
   }
@@ -93,13 +74,6 @@ class App extends Component {
     this.setState(this.state);
   };
 
-  componentDidMount = () => {
-    /* GET json data. */
-    Json.find()
-      .then(data => console.log(data))      
-      .catch(err => console.log(err.toString()));
-  };
-
   render() {
 
     return (
@@ -116,7 +90,8 @@ class App extends Component {
           removeNode={this.handleNodeRemoval}
           resetNodes={this.handleNodesReset}
           menuButtonClick={this.menuButtonClick}
-          handleFilter={this.handleFilter}          
+          handleFilter={this.handleFilter}
+          
           />
       </div>
     );
