@@ -14,8 +14,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(prodPath);
 } else {
   app.use(devPath);
-  app.get('/', function (_, res) {    
-    // res.send("asdasd")
+  app.get('/', function (_, res) {        
     res.sendFile(path.join(__dirname, '/index.html'));
   });
 
