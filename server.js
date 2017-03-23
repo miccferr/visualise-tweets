@@ -22,6 +22,9 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.join(__dirname, '/index.html'));
   });
 
+  app.get('/a', function (_, res) {
+    res.send("asdasdasd")
+  });
   // --------------------------------------------
   // Mongoose Connections + Data fetching routes
   // -------------------------------------------
@@ -52,12 +55,14 @@ if (process.env.NODE_ENV === 'production') {
       // router.get('/mapjson/:name', function (req, res) {
       app.get('/mapjson', function (req, res) {
         // es6 promise
-        Json.find()
-          .then(data => console.log(data))
+        Json.find()          
           .then(data => res.send(data))
+          .then(data => console.log(data))
           .catch(err => console.log(err.toString()));
+          // .then(data => res.send(JSON.stringify(data)))
       });
-      app.get('test', (req,res) => "asdasdasd")
+
+      app.get('/test', (req,res) => res.send("asdasdasd"))
     });
   };
 

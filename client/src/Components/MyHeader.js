@@ -3,9 +3,11 @@ import request from 'request-promise';
 
 const handleMongo = (e) => {
   e.preventDefault();
-  request('/test')
-    .then((data) => console.log(data))
-    .then(console.log('ciao'))
+  console.log("send req")
+  request('http://localhost:3000/mapjson')
+    .then(data => console.log(data))
+    .then(() => console.log('ciao'))
+    .catch( ()=> console.log('GET failed'))
 }
 
 function MyHeader(props) {
