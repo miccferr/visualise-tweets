@@ -29,10 +29,10 @@ function MySidebar(props) {
             <div className="fl w-100 ph4">
                 <div className="fl w-25 StoreListContainer">
                     {/*<locationFilters data={this.state} removeNode={this.handleNodeRemoval}/>*/}                    
-                    <StoreList data={props.data} removeNode={props.removeNode}/>
+                    <StoreList data={props.data} removeNode={props.removeNode} onZoom={props.onZoom}/>
                 </div>
                 <div className="fl w-75 bg-dark-pink">
-                    <MyMap data={props.data} />
+                    <MyMap data={props.data} center={props.center}/>
                 </div>
             </div>            
         </Sidebar>

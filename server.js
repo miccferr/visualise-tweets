@@ -29,7 +29,7 @@ if (process.env.NODE_ENV === 'production') {
   // Mongoose Connections + Data fetching routes
   // -------------------------------------------
   // Mongoose connection to MongoDB
-  mongoose.connect('mongodb://localhost/TweetsToTest', function (error) {
+  mongoose.connect('mongodb://localhost/Tweets', function (error) {
     if (error) {
       console.log(error);
     }
@@ -73,19 +73,8 @@ app.listen(app.get('port'), () => {
 });
 
 
-// /* GET layers json data. */
-// router.get('/maplayers', function (req, res) {
-//   Json.find({}, {
-//     'name': 1
-//   }, function (err, docs) {
-//     res.json(docs);
-//   });
-// });
-
-
-
-
-
+// EXAMPLE OF DATA
+// ---------------------------------------------------
 // {
 //   "_id": ObjectId("589a67f884322b74f297e6b4"),
 //   "entities": {

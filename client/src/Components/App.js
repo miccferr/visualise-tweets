@@ -18,6 +18,7 @@ class App extends Component {
     super(props);
     this.state = {
       data: [],
+      mapCenter : [51.505, -0.09],
       sidebarOpen: false,
       pullRight: true,
       isLocSubMenuOpen: false,
@@ -80,12 +81,21 @@ class App extends Component {
     this.setState(this.state);
   };
 
+  handleZoom = (e) => {
+    e.preventDefault();    
+    let coordsToCast =e.target.getAttribute('coords').split(",")
+    let coords = [parseFloat(coordsToCast[0]), parseFloat(coordsToCast[1])]
+    console.log(coords);    
+    this.setState({mapCenter: coords})
+  }
+
   render() {
 
     return (
       <div className="App">
         <MySidebar           
           data={this.state.data}
+          center={this.state.mapCenter}
           sidebarOpen={this.state.sidebarOpen}          
           isLocSubMenuOpen= {this.state.isLocSubMenuOpen}          
           isTypeSubMenuOpen = {this.state.isTypeSubMenuOpen}
@@ -97,6 +107,7 @@ class App extends Component {
           resetNodes={this.handleNodesReset}
           menuButtonClick={this.menuButtonClick}
           handleFilter={this.handleFilter}
+          onZoom= {this.handleZoom}
           
           />
       </div>

@@ -2,10 +2,10 @@ import React from 'react';
 import {Map, CircleMarker, Popup, TileLayer} from 'react-leaflet';
 import './MyMap.css'
 
-const position = [51.505, -0.09];
+
 
 const MyMap = (props) => (
-  <Map center={position} zoom={13} id='map' className='z-0'>
+  <Map center={props.center} zoom={13} id='map' className='z-0'>
     <TileLayer
       url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
       attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'/> 
