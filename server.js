@@ -20,36 +20,39 @@ if (process.env.NODE_ENV === 'production') {
     // res.sendFile(path.resolve(devPath))
   });
 
-  // // Mongoose connection to MongoDB
-  // mongoose.connect('mongodb://localhost/Tweets', function (error) {
-  //   if (error) {
-  //     console.log(error);
-  //   }
-  // });
+  // Mongoose connection to MongoDB
+  mongoose.connect('mongodb://localhost/Tweets', function (error) {
+    if (error) {
+      console.log(error);
+    }
+  });
 
-  // // Mongoose Schema definition
-  // const Schema = mongoose.Schema;
-  // const JsonSchema = new Schema({
-  //   name: String,
-  //   type: Schema.Types.Mixed
-  // });
+  // Mongoose Schema definition
+  const Schema = mongoose.Schema;
+  const JsonSchema = new Schema({
+    name: String,
+    type: Schema.Types.Mixed
+  });
 
-  // // Mongoose Model definition
-  // let Json = mongoose.model('JString', JsonSchema, 'Tweets');
+  // Mongoose Model definition
+  let Json = mongoose.model('JString', JsonSchema, 'Tweets');
 
-  // /* GET json data. */
-  // // this is then called client side with an http get to express
-  // // router.get('/mapjson/:name', function (req, res) {
-  // app.get('/mapjson', function (req, res) {
-  //   // es6 promise
-  //   Json.find()
-  //     .then(data => console.log(data))
-  //     .then(data => res.send(data))
-  //     .catch(err => console.log(err.toString()));
+  /* GET json data. */
+  // this is then called client side with an http get to express
+  // router.get('/mapjson/:name', function (req, res) {
+  app.get('/mapjson', function (req, res) {
+    // es6 promise
+    Json.find()
+      .then(data => console.log(data))
+      .then(data => res.send(data))
+      .catch(err => console.log(err.toString()));
 
-  // });
+  });
 }
 
+app.listen(app.get('port'), () => {
+  console.log(`Find the server at: http://localhost:${app.get('port')}/`); // eslint-disable-line no-console
+});
 
 
 // /* GET layers json data. */
