@@ -3,8 +3,7 @@ import request from 'request-promise';
 
 const handleMongo = (e) => {
   e.preventDefault();  
-  request('http://localhost:3000/mapjson')
-    .set('Accept', 'application/json')
+  request('http://localhost:3000/mapjson')    
     .then(data => console.log(JSON.parse(data)))    
     .catch( ()=> console.log('GET failed'))
 }

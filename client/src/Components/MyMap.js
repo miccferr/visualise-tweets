@@ -2,7 +2,6 @@ import React from 'react';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import './MyMap.css'
 
-
 const position = [51.505, -0.09];
 
 const MyMap = (

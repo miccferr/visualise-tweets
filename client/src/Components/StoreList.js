@@ -6,7 +6,7 @@ function ListItem(props) {
 }
 
 function StoreList(props) { 
-  const stores = props.data.features
+  const stores = props.data
     
   const listItems = stores.map((store) =>
     <ListItem key={store.properties.loc_id.toString()}
