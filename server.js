@@ -29,7 +29,7 @@ if (process.env.NODE_ENV === 'production') {
   // Mongoose Connections + Data fetching routes
   // -------------------------------------------
   // Mongoose connection to MongoDB
-  mongoose.connect('mongodb://localhost/Tweets', function (error) {
+  mongoose.connect('mongodb://localhost/TweetsToTest', function (error) {
     if (error) {
       console.log(error);
     }
