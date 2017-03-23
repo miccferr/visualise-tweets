@@ -1,5 +1,14 @@
 import React from 'react';
+import request from 'request';
+// import {Promise} from 'bluebird';
+// Promise.promisifyAll(request);
 
+const handleMongo = (e) => {
+  e.preventDefault();
+  request.get('http://localhost:3000/test')
+    .then(data => console.log(data))
+    .then(console.log('ciao'))
+}
 
 function MyHeader(props) {
   return (
@@ -13,7 +22,7 @@ function MyHeader(props) {
           href="/">Home</a>
         <a
           className="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l"
-          href="/portfolio">Portfolio</a>
+          href="/portfolio" onClick={handleMongo}>Mongo</a>
         <a
           className="f6 f5-l link bg-animate black-80 hover-bg-light-blue dib pa3 ph4-l"
           href="/shop">Shop</a>

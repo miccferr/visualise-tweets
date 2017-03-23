@@ -11,17 +11,20 @@ app.set('port', (process.env.PORT || 3001));
 
 // Express only serves static assets in production
 if (process.env.NODE_ENV === 'production') {
+  // serve from bundle folder
   app.use(prodPath);
 } else {
+  // serve from client folder
   app.use(devPath);
 
+  // root route
   app.get('/', function (_, res) {
     res.sendFile(path.join(__dirname, '/index.html'));
   });
 
-  // -----------------------------------------
-  // Mongoose Connections + Data fetching URLs
-  // -----------------------------------------
+  // --------------------------------------------
+  // Mongoose Connections + Data fetching routes
+  // -------------------------------------------
   // Mongoose connection to MongoDB
   mongoose.connect('mongodb://localhost/Tweets', function (error) {
     if (error) {
@@ -33,17 +36,16 @@ if (process.env.NODE_ENV === 'production') {
   db.on('error', console.error.bind(console, 'connection error:'));
   db.once('open', function () {
       // we're connected!
+       console.log('Connected to mongo server.');
+
       // Mongoose Schema definition
       const Schema = mongoose.Schema;
       const JsonSchema = new Schema({
         name: String,
         type: Schema.Types.Mixed
-      });
-      
+      });      
       // Mongoose Model definition
       let Json = mongoose.model('JString', JsonSchema, 'mic');
-      console.log('Connected to mongo server.');
-
 
       /* GET json data. */
       // this is then called client side with an http get to express
@@ -55,8 +57,8 @@ if (process.env.NODE_ENV === 'production') {
           .then(data => res.send(data))
           .catch(err => console.log(err.toString()));
       });
-    })
-
+      app.get('test', (req,res) => "asdasdasd")
+    });
   };
 
 
