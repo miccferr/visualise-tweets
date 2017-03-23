@@ -34,6 +34,7 @@ function SidebarContent(props) {
 
     return (
         <div style={styles.content}>
+                {console.log(props)}
              <SuggestWidget suggestions={props.data.features} onFilter={props.onFilter} />
             {/*<Example suggestions={props.data.features}/>*/}
         </div>

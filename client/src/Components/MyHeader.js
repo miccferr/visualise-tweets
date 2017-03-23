@@ -2,11 +2,9 @@ import React from 'react';
 import request from 'request-promise';
 
 const handleMongo = (e) => {
-  e.preventDefault();
-  console.log("send req")
+  e.preventDefault();  
   request('http://localhost:3000/mapjson')
-    .then(data => console.log(data))
-    .then(() => console.log('ciao'))
+    .then(data => console.log(data))    
     .catch( ()=> console.log('GET failed'))
 }
 

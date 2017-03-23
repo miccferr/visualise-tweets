@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import './App.css';
 import data from '../../public/data.json';
 import MySidebar from './MySidebar';
+import request from 'request-promise';
+
 
 // import LocationFilters from './LocationFilter'
 
@@ -23,7 +25,11 @@ class App extends Component {
       
     };
   }
-
+  componentDidMount (prevProps, prevState) {
+    request('http://localhost:3000/mapjson')
+      .then(data =>{ this.setState({data: JSON.parse(data)}) })                    
+  }
+  
   handleFilter = (e)=>{    
     e.preventDefault();  
     console.log(e.target.value);
