@@ -4,10 +4,12 @@ import FilterButtonsMenu from './FilterButtons.js';
 import SuggestWidget from './SuggestWidget.js'
 // import Example from './autoexample.js'
 
-const styles = {
+    
+    const styles = {
     sidebar: {
-        width: 256
-
+        width: 256,
+        backgroundColor: "lavender",
+        
     },
     sidebarLink: {
         display: 'block',
@@ -33,11 +35,13 @@ const styles = {
 function SidebarContent(props) {    
 
     return (
-        <div style={styles.content}>
-                {console.log(props)}
+        
+        <div style={styles.content}>                
              <SuggestWidget suggestions={props.data} onFilter={props.onFilter} />
             {/*<Example suggestions={props.data.features}/>*/}
         </div>
+        
+        
     )
 };
 

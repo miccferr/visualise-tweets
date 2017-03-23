@@ -108,7 +108,7 @@ class App extends Component {
           menuButtonClick={this.menuButtonClick}
           handleFilter={this.handleFilter}
           onZoom= {this.handleZoom}
-          
+          styles={"position: relative;"}          
           />
       </div>
     );

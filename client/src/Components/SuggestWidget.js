@@ -24,7 +24,7 @@ const getSuggestionValue = suggestion => {
 // Use your imagination to render suggestions.
 const renderSuggestion = suggestion => (
   <div>    
-    {suggestion.text}    
+    {suggestion.text}
   </div>
 );
 
@@ -45,7 +45,9 @@ class SuggestWidget extends React.Component {
     };
   }
 
-  onChange = (event, { newValue }) => {    
+  onChange = (event, { newValue }) => {  
+    console.log('newValu',newValue);
+      
     this.setState({
       value: newValue
     });
@@ -68,7 +70,7 @@ class SuggestWidget extends React.Component {
 
   onSuggestionSelected = (e, suggestion) => {
     // TODO: zoom to marker or somthing..
-    console.log(suggestion )
+    // console.log(suggestion )
   }
 
   render() {    
