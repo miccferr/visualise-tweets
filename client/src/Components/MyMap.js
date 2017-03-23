@@ -1,5 +1,5 @@
 import React from 'react';
-import {Map, Marker, Popup, TileLayer} from 'react-leaflet';
+import {Map, CircleMarker, Popup, TileLayer} from 'react-leaflet';
 import './MyMap.css'
 
 const position = [51.505, -0.09];
@@ -12,15 +12,15 @@ const MyMap = (props) => (
       
       {props.data.map((marker) => {
         return (
-          <Marker key={marker._id} position={marker.geo.coordinates}>
+          <CircleMarker key={marker._id} center={marker.geo.coordinates} radius={3}>
             <Popup>
               <span>
                 {marker.text}</span>
             </Popup>
-          </Marker>
+          </CircleMarker>
         )
       })}
-      
+
   </Map>
 );
 
