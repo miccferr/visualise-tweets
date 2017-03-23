@@ -6,7 +6,7 @@ function escapeRegexCharacters(str) {
 }
 
 // Teach Autosuggest how to calculate suggestions for any given input value.
-const getSuggestions = (value,arrayToCompare) => {
+const getSuggestions = (value) => {
   const escapedValue = escapeRegexCharacters(value.trim());
 
   if (value === undefined) {
@@ -15,7 +15,7 @@ const getSuggestions = (value,arrayToCompare) => {
 
   const regex = new RegExp('^' + escapedValue, 'i');
 
-  return arrayToCompare.filter(language => regex.test(language.text));
+  return this.props.suggestions.filter(language => regex.test(language.text));
 
 
   // const inputValue = value.trim().toLowerCase();
@@ -30,8 +30,7 @@ const getSuggestions = (value,arrayToCompare) => {
 // When suggestion is clicked, Autosuggest needs to populate the input element
 // based on the clicked suggestion. Teach Autosuggest how to calculate the
 // input value for every given suggestion.
-const getSuggestionValue = suggestion => { 
-    
+const getSuggestionValue = suggestion => {     
   suggestion.text
 };
 
@@ -61,10 +60,30 @@ class SuggestWidget extends React.Component {
     };
   }
 
+  getSuggestions = (value) => {
+  // const escapedValue = escapeRegexCharacters(value.trim());
+
+  // if (value === undefined) {
+  //   return [];
+  // }     
+
+  // const regex = new RegExp('^' + escapedValue, 'i');
+
+  // return this.props.suggestions.filter(language => regex.test(language.text));
+
+
+  const inputValue = value.trim().toLowerCase();
+  const inputLength = inputValue.length;  
+  return inputLength === 0 ? [] : this.props.suggestions.filter(lang =>{
+  console.log(lang.text.toLowerCase().slice(0, inputLength) )
+    return lang.text.toLowerCase().slice(0, inputLength) === inputValue}
+  );
+};
+
   onChange = (event, { newValue, method }) => {          
     console.log('newValue',newValue);            
     this.setState({
-      value: ''+ newValue
+      value: newValue
     });    
   };
 
@@ -72,7 +91,7 @@ class SuggestWidget extends React.Component {
   // You already implemented this logic above, so just use it.
   onSuggestionsFetchRequested = ( {value}) => {
     this.setState({
-      suggestions: getSuggestions(value,  this.props.suggestions)
+      suggestions: this.getSuggestions(value)
     });
   };
 
