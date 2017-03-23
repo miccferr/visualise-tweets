@@ -3,7 +3,7 @@
     height: 500px;
 }
 
-.sideBarContainer{
+#sideBarContainer{
     background-color: 'red';
     position: relative;
 }

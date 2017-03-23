@@ -90,7 +90,12 @@ class App extends Component {
   }
 
   render() {
-
+const sidebar = {
+        width: 2569,
+        backgroundColor: "red",
+        position: "relative"
+        
+    }
     return (
       <div className="App">
         <MySidebar           
@@ -108,7 +113,8 @@ class App extends Component {
           menuButtonClick={this.menuButtonClick}
           handleFilter={this.handleFilter}
           onZoom= {this.handleZoom}
-          styles={"position: relative;"}          
+          
+          
           />
       </div>
     );

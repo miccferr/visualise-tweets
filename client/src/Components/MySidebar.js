@@ -11,7 +11,7 @@ import StoreList from './StoreList';
 // className="sideBarContainer"
 function MySidebar(props) {
     
-    const sidebarContent = <SidebarContent {...props} />
+const sidebarContent = <SidebarContent {...props} />
 
 
 const styles = {
@@ -32,6 +32,7 @@ const styles = {
     WebkitTransition: '-webkit-transform .3s ease-out',
     willChange: 'transform',
     overflowY: 'auto',
+    backgroundColor: "white"
   },
   content: {
     position: 'absolute',
@@ -62,13 +63,6 @@ const styles = {
   },
 }
 
-const sidebar = {
-        width: 256,
-        backgroundColor: "red",
-        position: "relative"
-        
-    }
-
     const sidebarProps = {
         sidebar:sidebarContent,
         open: props.sidebarOpen,
@@ -77,11 +71,10 @@ const sidebar = {
         removeNode:props.removeNode,
         menuButtonClick:props.menuButtonClick,
         pullRight: true
-        
     };
 
     return (
-        <Sidebar {...sidebarProps} styles={sidebar} className="sideBarContainer">
+        <Sidebar {...sidebarProps} styles={styles} className="bg-silver" >
             <MyHeader menuButtonClick={props.menuButtonClick}/>
             <div className="fl w-100 ph4" >
                 <div className="fl w-25 StoreListContainer" >
@@ -93,6 +86,10 @@ const sidebar = {
                 </div>
             </div>            
         </Sidebar>
+        
+        
+        
+        
     );
 };
 
