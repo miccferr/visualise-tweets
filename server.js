@@ -2,8 +2,8 @@ const path = require('path')
 const express = require('express')
 const app = express();
 const router = express.Router();
-const devPath = express.static(path.join(__dirname, './public'))
-const prodPath = express.static(path.join(__dirname, './build'));
+const devPath = express.static(path.join(__dirname, './client/public'))
+const prodPath = express.static(path.join(__dirname, './client/build'));
 const Promise = require("bluebird");
 const mongoose = Promise.promisifyAll(require("mongoose"));
 
