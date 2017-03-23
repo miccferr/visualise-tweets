@@ -32,7 +32,7 @@ function MySidebar(props) {
                     <StoreList data={props.data} removeNode={props.removeNode}/>
                 </div>
                 <div className="fl w-75 bg-dark-pink">
-                    {MyMap}
+                    <MyMap data={props.data} />
                 </div>
             </div>            
         </Sidebar>
