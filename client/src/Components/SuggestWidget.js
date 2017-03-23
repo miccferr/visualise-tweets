@@ -8,8 +8,8 @@ const getSuggestions = (value,arrayToCompare) => {
   const inputLength = inputValue.length;
 
   return inputLength === 0 ? [] : arrayToCompare.filter(lang =>{
-  console.log(lang.properties.address.toLowerCase().slice(0, inputLength) )
-    return lang.properties.address.toLowerCase().slice(0, inputLength) === inputValue}
+  console.log(lang.text.toLowerCase().slice(0, inputLength) )
+    return lang.text.toLowerCase().slice(0, inputLength) === inputValue}
   );
 };
 
@@ -17,14 +17,14 @@ const getSuggestions = (value,arrayToCompare) => {
 // based on the clicked suggestion. Teach Autosuggest how to calculate the
 // input value for every given suggestion.
 const getSuggestionValue = suggestion => {  
-  suggestion.name
+  suggestion.text
 };
 
 
 // Use your imagination to render suggestions.
 const renderSuggestion = suggestion => (
   <div>    
-    {suggestion.properties.address}    
+    {suggestion.text}    
   </div>
 );
 

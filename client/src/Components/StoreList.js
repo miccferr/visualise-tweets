@@ -9,8 +9,8 @@ function StoreList(props) {
   const stores = props.data
     
   const listItems = stores.map((store) =>
-    <ListItem key={store.properties.loc_id.toString()}
-              value={store.properties.business_name} />
+    <ListItem key={store._id.toString()}
+              value={store.text} />
   );
   return (
     <ul className="pa3 pa5-ns">{listItems}</ul>
