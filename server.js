@@ -1,62 +1,67 @@
 const path = require('path')
 const express = require('express')
+const app = express();
+const router = express.Router();
+const devPath = path.join(__dirname, 'public', 'index.html');
+const prodPath = express.static(path.join(__dirname, './build'));
 const Promise = require("bluebird");
 const mongoose = Promise.promisifyAll(require("mongoose"));
 
+app.set('port', (process.env.PORT || 3001));
 
-module.exports = {
-  app: function () {
-    const app = express();
-    const router = express.Router();
-    const indexPath = path.join(__dirname, 'index.html');
-    const publicPath = express.static(path.join(__dirname, '../dist'));   
-        
-    app.use(publicPath);
-    app.get('/', function (_, res) {
-       res.sendFile(path.resolve(indexPath))       
-    });
-    
-    // Mongoose connection to MongoDB
-    mongoose.connect('mongodb://localhost/Tweets', function (error) {
-      if (error) {
-        console.log(error);
-      }
-    });
+// Express only serves static assets in production
+if (process.env.NODE_ENV === 'production') {
+  // app.use(express.static('./build'));
+  app.use(express.static(prodPath));
+} else {
+  // app.use(devPath);
+  app.get('/', function (_, res) {
+    res.send("asdasdas")
+    // res.sendFile(path.resolve(devPath))
+  });
 
-    // Mongoose Schema definition
-    const Schema = mongoose.Schema;
-    const JsonSchema = new Schema({
-      name: String,
-      type: Schema.Types.Mixed
-    });
+  // // Mongoose connection to MongoDB
+  // mongoose.connect('mongodb://localhost/Tweets', function (error) {
+  //   if (error) {
+  //     console.log(error);
+  //   }
+  // });
 
-    // Mongoose Model definition
-    let Json = mongoose.model('JString', JsonSchema, 'Tweets');
+  // // Mongoose Schema definition
+  // const Schema = mongoose.Schema;
+  // const JsonSchema = new Schema({
+  //   name: String,
+  //   type: Schema.Types.Mixed
+  // });
 
-    /* GET json data. */
-    // this is then called client side with an http get to express
-    // router.get('/mapjson/:name', function (req, res) {
-    app.get('/mapjson', function (req, res) {      
-        // es6 promise
-        Json.find()
-          .then(data => console.log(data))
-          .then(data => res.send(data))
-          .catch(err => console.log(err.toString()));
+  // // Mongoose Model definition
+  // let Json = mongoose.model('JString', JsonSchema, 'Tweets');
 
-    });
+  // /* GET json data. */
+  // // this is then called client side with an http get to express
+  // // router.get('/mapjson/:name', function (req, res) {
+  // app.get('/mapjson', function (req, res) {
+  //   // es6 promise
+  //   Json.find()
+  //     .then(data => console.log(data))
+  //     .then(data => res.send(data))
+  //     .catch(err => console.log(err.toString()));
 
-    // /* GET layers json data. */
-    // router.get('/maplayers', function (req, res) {
-    //   Json.find({}, {
-    //     'name': 1
-    //   }, function (err, docs) {
-    //     res.json(docs);
-    //   });
-    // });
-
-    return app;
-  }
+  // });
 }
+
+
+
+// /* GET layers json data. */
+// router.get('/maplayers', function (req, res) {
+//   Json.find({}, {
+//     'name': 1
+//   }, function (err, docs) {
+//     res.json(docs);
+//   });
+// });
+
+
 
 
 
