@@ -1,12 +1,10 @@
 import React from 'react';
-import request from 'request';
-// import {Promise} from 'bluebird';
-// Promise.promisifyAll(request);
+import request from 'request-promise';
 
 const handleMongo = (e) => {
   e.preventDefault();
-  request.get('http://localhost:3000/test')
-    .then(data => console.log(data))
+  request('/test')
+    .then((data) => console.log(data))
     .then(console.log('ciao'))
 }
 
