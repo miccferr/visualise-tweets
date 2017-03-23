@@ -32,6 +32,8 @@
     "css": "tachyons src/index.css > src/bundle.css --minify",
     "prestart": "npm run css",
     "prebuild": "npm run css",
-    "server": "node ./server.js"
+    "server": "node ./server.js",
+    "client": "node ./start-client.js",
+    "my-start": "concurrently \"npm run server\" \"npm run client\""
   }
 }
