@@ -14,39 +14,53 @@ if (process.env.NODE_ENV === 'production') {
   app.use(prodPath);
 } else {
   app.use(devPath);
-  app.get('/', function (_, res) {        
+
+  app.get('/', function (_, res) {
     res.sendFile(path.join(__dirname, '/index.html'));
   });
 
+  // -----------------------------------------
+  // Mongoose Connections + Data fetching URLs
+  // -----------------------------------------
   // Mongoose connection to MongoDB
   mongoose.connect('mongodb://localhost/Tweets', function (error) {
     if (error) {
       console.log(error);
     }
   });
+  // ensure connection is open
+  var db = mongoose.connection;
+  db.on('error', console.error.bind(console, 'connection error:'));
+  db.once('open', function () {
+      // we're connected!
+      // Mongoose Schema definition
+      const Schema = mongoose.Schema;
+      const JsonSchema = new Schema({
+        name: String,
+        type: Schema.Types.Mixed
+      });
+      
+      // Mongoose Model definition
+      let Json = mongoose.model('JString', JsonSchema, 'mic');
+      console.log('Connected to mongo server.');
 
-  // Mongoose Schema definition
-  const Schema = mongoose.Schema;
-  const JsonSchema = new Schema({
-    name: String,
-    type: Schema.Types.Mixed
-  });
 
-  // Mongoose Model definition
-  let Json = mongoose.model('JString', JsonSchema, 'Tweets');
+      /* GET json data. */
+      // this is then called client side with an http get to express
+      // router.get('/mapjson/:name', function (req, res) {
+      app.get('/mapjson', function (req, res) {
+        // es6 promise
+        Json.find()
+          .then(data => console.log(data))
+          .then(data => res.send(data))
+          .catch(err => console.log(err.toString()));
+      });
+    })
 
-  /* GET json data. */
-  // this is then called client side with an http get to express
-  // router.get('/mapjson/:name', function (req, res) {
-  app.get('/mapjson', function (req, res) {
-    // es6 promise
-    Json.find()
-      .then(data => console.log(data))
-      .then(data => res.send(data))
-      .catch(err => console.log(err.toString()));
+  };
 
-  });
-}
+
+
 
 app.listen(app.get('port'), () => {
   console.log(`Find the server at: http://localhost:${app.get('port')}/`); // eslint-disable-line no-console
