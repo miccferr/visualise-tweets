@@ -55,9 +55,8 @@ if (process.env.NODE_ENV === 'production') {
       // router.get('/mapjson/:name', function (req, res) {
       app.get('/mapjson', function (req, res) {
         // es6 promise
-        Json.find()          
-          .then(data => res.send(data))
-          .then(data => console.log(data))
+        Json.find()                    
+          .then(data => res.send(data))                    
           .catch(err => console.log(err.toString()));
           // .then(data => res.send(JSON.stringify(data)))
       });

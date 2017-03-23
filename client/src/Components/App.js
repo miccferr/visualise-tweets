@@ -26,7 +26,7 @@ class App extends Component {
     };
   }
   componentDidMount (prevProps, prevState) {
-    request('http://localhost:3000/mapjson')
+    request('http://localhost:3000/mapjson')      
       .then(data =>{ this.setState({data: JSON.parse(data)}) })                    
   }
   
