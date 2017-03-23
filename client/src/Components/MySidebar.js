@@ -32,7 +32,8 @@ const styles = {
     WebkitTransition: '-webkit-transform .3s ease-out',
     willChange: 'transform',
     overflowY: 'auto',
-    backgroundColor: "white"
+    backgroundColor: "white",
+    maxWidth: 500
   },
   content: {
     position: 'absolute',
@@ -70,7 +71,8 @@ const styles = {
         data:props.data,
         removeNode:props.removeNode,
         menuButtonClick:props.menuButtonClick,
-        pullRight: true
+        pullRight: true,
+        onFilter :props.handleFilter
     };
 
     return (

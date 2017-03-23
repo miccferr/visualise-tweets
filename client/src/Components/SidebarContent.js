@@ -10,9 +10,8 @@ const content ={
     backgroundColor: "white"
   }
     return (
-        <div style={content}>               
-        
-             <SuggestWidget suggestions={props.data} onFilter={props.onFilter} />
+        <div style={content}>            
+             <SuggestWidget suggestions={props.data} onZoom={props.handleZoom}/>
              
         </div>
     )

@@ -1,22 +1,37 @@
 import React, {Component} from 'react';
 import Autosuggest from 'react-autosuggest';
 
+function escapeRegexCharacters(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
 
 // Teach Autosuggest how to calculate suggestions for any given input value.
-const getSuggestions = (value,arrayToCompare) => {    
-  const inputValue = value.trim().toLowerCase();
-  const inputLength = inputValue.length;
+const getSuggestions = (value,arrayToCompare) => {
+  const escapedValue = escapeRegexCharacters(value.trim());
 
-  return inputLength === 0 ? [] : arrayToCompare.filter(lang =>{
-  console.log(lang.text.toLowerCase().slice(0, inputLength) )
-    return lang.text.toLowerCase().slice(0, inputLength) === inputValue}
-  );
+  if (value === undefined) {
+    return [];
+  }     
+
+  const regex = new RegExp('^' + escapedValue, 'i');
+
+  return arrayToCompare.filter(language => regex.test(language.text));
+
+
+  // const inputValue = value.trim().toLowerCase();
+  // const inputLength = inputValue.length;
+  // 
+  // return inputLength === 0 ? [] : arrayToCompare.filter(lang =>{
+  // console.log(lang.text.toLowerCase().slice(0, inputLength) )
+  //   return lang.text.toLowerCase().slice(0, inputLength) === inputValue}
+  // );
 };
 
 // When suggestion is clicked, Autosuggest needs to populate the input element
 // based on the clicked suggestion. Teach Autosuggest how to calculate the
 // input value for every given suggestion.
-const getSuggestionValue = suggestion => {  
+const getSuggestionValue = suggestion => { 
+    
   suggestion.text
 };
 
@@ -31,6 +46,7 @@ const renderSuggestion = suggestion => (
 
 
 class SuggestWidget extends React.Component {
+
  constructor() {
     super();
     
@@ -45,12 +61,11 @@ class SuggestWidget extends React.Component {
     };
   }
 
-  onChange = (event, { newValue }) => {  
-    console.log('newValu',newValue);
-      
+  onChange = (event, { newValue, method }) => {          
+    console.log('newValue',newValue);            
     this.setState({
-      value: newValue
-    });
+      value: ''+ newValue
+    });    
   };
 
   // Autosuggest will call this function every time you need to update suggestions.
@@ -68,11 +83,6 @@ class SuggestWidget extends React.Component {
     });
   };
 
-  onSuggestionSelected = (e, suggestion) => {
-    // TODO: zoom to marker or somthing..
-    // console.log(suggestion )
-  }
-
   render() {    
     const { value, suggestions } = this.state;
 
@@ -87,14 +97,11 @@ class SuggestWidget extends React.Component {
     return (
       <Autosuggest
         suggestions={suggestions}
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-        onSuggestionSelected={this.onSuggestionSelected}
+        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}        
         onSuggestionsClearRequested={this.onSuggestionsClearRequested}
         getSuggestionValue={getSuggestionValue}
         renderSuggestion={renderSuggestion}
-        inputProps={inputProps}
-        onClick={this.props.onFilter}
-        
+        inputProps={inputProps}      
       />
     );
   }
