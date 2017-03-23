@@ -11,7 +11,6 @@ app.set('port', (process.env.PORT || 3001));
 
 // Express only serves static assets in production
 if (process.env.NODE_ENV === 'production') {
-  // app.use(express.static('./build'));
   app.use(prodPath);
 } else {
   app.use(devPath);
