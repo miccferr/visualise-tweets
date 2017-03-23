@@ -2,7 +2,7 @@ const path = require('path')
 const express = require('express')
 const app = express();
 const router = express.Router();
-const devPath = path.join(__dirname, 'public', 'index.html');
+const devPath = express.static(path.join(__dirname, './public'))
 const prodPath = express.static(path.join(__dirname, './build'));
 const Promise = require("bluebird");
 const mongoose = Promise.promisifyAll(require("mongoose"));
@@ -12,12 +12,12 @@ app.set('port', (process.env.PORT || 3001));
 // Express only serves static assets in production
 if (process.env.NODE_ENV === 'production') {
   // app.use(express.static('./build'));
-  app.use(express.static(prodPath));
+  app.use(prodPath);
 } else {
-  // app.use(devPath);
-  app.get('/', function (_, res) {
-    res.send("asdasdas")
-    // res.sendFile(path.resolve(devPath))
+  app.use(devPath);
+  app.get('/', function (_, res) {    
+    // res.send("asdasd")
+    res.sendFile(path.join(__dirname, '/index.html'));
   });
 
   // Mongoose connection to MongoDB
