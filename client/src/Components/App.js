@@ -81,10 +81,9 @@ class App extends Component {
     this.setState(this.state);
   };
 
-  handleZoom = (e) => {
-    e.preventDefault();    
-    let coordsToCast =e.target.getAttribute('coords').split(",")
-    let coords = [parseFloat(coordsToCast[0]), parseFloat(coordsToCast[1])]
+  handleZoom = (coords) => {    
+    // let coordsToCast =e.target.getAttribute('coords').split(",")
+    // let coords = [parseFloat(coordsToCast[0]), parseFloat(coordsToCast[1])]
     console.log(coords);    
     this.setState({mapCenter: coords})
   }
@@ -112,7 +111,7 @@ const sidebar = {
           resetNodes={this.handleNodesReset}
           menuButtonClick={this.menuButtonClick}
           handleFilter={this.handleFilter}
-          onZoom= {this.handleZoom}
+          handleZoom= {this.handleZoom}
           
           
           />

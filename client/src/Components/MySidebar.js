@@ -64,34 +64,30 @@ const styles = {
   },
 }
 
-    const sidebarProps = {
-        sidebar:sidebarContent,
-        open: props.sidebarOpen,
-        onSetOpen: props.onSetOpen,
-        data:props.data,
-        removeNode:props.removeNode,
-        menuButtonClick:props.menuButtonClick,
-        pullRight: true,
-        onFilter :props.handleFilter
-    };
+const sidebarProps = {
+    sidebar:sidebarContent,
+    open: props.sidebarOpen,
+    onSetOpen: props.onSetOpen,
+    data:props.data,
+    removeNode:props.removeNode,
+    menuButtonClick:props.menuButtonClick,
+    pullRight: true,
+    onZoom : props.handleZoom
+};
 
-    return (
-        <Sidebar {...sidebarProps} styles={styles} className="bg-silver" >
-            <MyHeader menuButtonClick={props.menuButtonClick}/>
-            <div className="fl w-100 ph4" >
-                <div className="fl w-25 StoreListContainer" >
-                    {/*<locationFilters data={this.state} removeNode={this.handleNodeRemoval}/>*/}                    
-                    <StoreList data={props.data} removeNode={props.removeNode} onZoom={props.onZoom}/>
-                </div>
-                <div className="fl w-75 bg-dark-pink">
-                    <MyMap data={props.data} center={props.center}/>
-                </div>
-            </div>            
-        </Sidebar>
-        
-        
-        
-        
+return (
+    <Sidebar {...sidebarProps} styles={styles} className="bg-silver" >
+        <MyHeader menuButtonClick={props.menuButtonClick}/>
+        <div className="fl w-100 ph4" >
+            <div className="fl w-25 StoreListContainer" >
+                {/*<locationFilters data={this.state} removeNode={this.handleNodeRemoval}/>*/}                    
+                <StoreList data={props.data} removeNode={props.removeNode} onZoom={props.onZoom}/>
+            </div>
+            <div className="fl w-75 bg-dark-pink">
+                <MyMap data={props.data} center={props.center}/>
+            </div>
+        </div>            
+    </Sidebar>        
     );
 };
 

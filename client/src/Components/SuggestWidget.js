@@ -1,10 +1,25 @@
 import React, {Component} from 'react';
 import Autosuggest from 'react-autosuggest';
+ 
+
+ const getSuggestions = (value, arrayToCompare) => {  
+  if (value === '') {
+    return [];
+  }     
+  const inputValue = value.trim().toLowerCase();
+  const inputLength = inputValue.length;    
+  return inputLength === 0 ? [] : arrayToCompare.filter(tweet =>{      
+    return  tweet.text.toLowerCase().slice(0, inputLength) === inputValue 
+    }
+  );
+};
 
 // When suggestion is clicked, Autosuggest needs to populate the input element
 // based on the clicked suggestion. Teach Autosuggest how to calculate the
 // input value for every given suggestion.
-const getSuggestionValue = suggestion =>  suggestion.text;
+const getSuggestionValue = suggestion =>  {  
+  return suggestion.text
+};
 
 // Use your imagination to render suggestions.
 const renderSuggestion = suggestion => {
@@ -12,7 +27,6 @@ return <div>
     {suggestion.text}
   </div>
 };
-
 
 
 class SuggestWidget extends React.Component {
@@ -31,20 +45,14 @@ class SuggestWidget extends React.Component {
     };
   }
 
-  getSuggestions = (value) => {  
-  if (value === '') {
-    return [];
-  }     
-  const inputValue = value.trim().toLowerCase();
-  const inputLength = inputValue.length;  
-  return inputLength === 0 ? [] : this.props.suggestions.filter(lang =>{
-  console.log(lang.text.toLowerCase().slice(0, inputLength) )
-    return lang.text.toLowerCase().slice(0, inputLength) === inputValue}
-  );
-};
+  onSuggestionSelected = (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method } ) => {
+    // console.log(this.props)
+    
+    this.props.onZoom(suggestion.geo.coordinates)
+  }
 
   onChange = (event, { newValue, method }) => {          
-    console.log('newValue',newValue);            
+    console.log('newValue', newValue);            
     this.setState({
       value: newValue
     });    
@@ -52,9 +60,9 @@ class SuggestWidget extends React.Component {
 
   // Autosuggest will call this function every time you need to update suggestions.
   // You already implemented this logic above, so just use it.
-  onSuggestionsFetchRequested = ( {value}) => {
+  onSuggestionsFetchRequested = ( {value}) => {    
     this.setState({
-      suggestions: this.getSuggestions(value)
+      suggestions: getSuggestions(value,this.props.suggestions)
     });
   };
 
@@ -81,6 +89,7 @@ class SuggestWidget extends React.Component {
         suggestions={suggestions}
         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}        
         onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+        onSuggestionSelected = {this.onSuggestionSelected}
         getSuggestionValue={getSuggestionValue}
         renderSuggestion={renderSuggestion}
         inputProps={inputProps}      
