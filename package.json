@@ -15,8 +15,7 @@
     "babel-polyfill": "^6.23.0",
     "bluebird": "^3.5.0",
     "dotenv": "^4.0.0",
-    "mongoose": "^4.9.1",
-    "supercluster": "^2.3.0"
+    "mongoose": "^4.9.1"
   },
   "scripts": {
     "server": "node ./server.js",
