@@ -1,46 +1,17 @@
 import React, {Component} from 'react';
 import Autosuggest from 'react-autosuggest';
 
-function escapeRegexCharacters(str) {
-  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-
-// Teach Autosuggest how to calculate suggestions for any given input value.
-const getSuggestions = (value) => {
-  const escapedValue = escapeRegexCharacters(value.trim());
-
-  if (value === undefined) {
-    return [];
-  }     
-
-  const regex = new RegExp('^' + escapedValue, 'i');
-
-  return this.props.suggestions.filter(language => regex.test(language.text));
-
-
-  // const inputValue = value.trim().toLowerCase();
-  // const inputLength = inputValue.length;
-  // 
-  // return inputLength === 0 ? [] : arrayToCompare.filter(lang =>{
-  // console.log(lang.text.toLowerCase().slice(0, inputLength) )
-  //   return lang.text.toLowerCase().slice(0, inputLength) === inputValue}
-  // );
-};
-
 // When suggestion is clicked, Autosuggest needs to populate the input element
 // based on the clicked suggestion. Teach Autosuggest how to calculate the
 // input value for every given suggestion.
-const getSuggestionValue = suggestion => {     
-  suggestion.text
-};
-
+const getSuggestionValue = suggestion =>  suggestion.text;
 
 // Use your imagination to render suggestions.
-const renderSuggestion = suggestion => (
-  <div>    
+const renderSuggestion = suggestion => {
+return <div>    
     {suggestion.text}
   </div>
-);
+};
 
 
 
@@ -60,18 +31,10 @@ class SuggestWidget extends React.Component {
     };
   }
 
-  getSuggestions = (value) => {
-  // const escapedValue = escapeRegexCharacters(value.trim());
-
-  // if (value === undefined) {
-  //   return [];
-  // }     
-
-  // const regex = new RegExp('^' + escapedValue, 'i');
-
-  // return this.props.suggestions.filter(language => regex.test(language.text));
-
-
+  getSuggestions = (value) => {  
+  if (value === '') {
+    return [];
+  }     
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;  
   return inputLength === 0 ? [] : this.props.suggestions.filter(lang =>{
