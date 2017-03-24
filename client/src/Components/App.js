@@ -3,7 +3,7 @@ import './App.css';
 import data from '../../public/data.json';
 import MySidebar from './MySidebar';
 import request from 'request-promise';
-
+import 'fs'
 
 // import LocationFilters from './LocationFilter'
 
