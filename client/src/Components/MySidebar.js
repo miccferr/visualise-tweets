@@ -84,7 +84,7 @@ return (
                 <StoreList data={props.data} removeNode={props.removeNode} onZoom={props.onZoom}/>
             </div>
             <div className="fl w-75 bg-dark-pink">
-                <MyMap data={props.data} center={props.center}/>
+                <MyMap data={props.data} center={props.center} />
             </div>
         </div>            
     </Sidebar>        
