@@ -1,6 +1,7 @@
 import React from 'react';
 import {Map, CircleMarker, Popup, TileLayer} from 'react-leaflet';
 import './MyMap.css'
+import supercluster from 'supercluster'
 
 const MyMap = (props) => (
   <Map center={props.center} zoom={13} id='map' className='z-0'>
